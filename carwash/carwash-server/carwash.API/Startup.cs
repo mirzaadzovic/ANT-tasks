@@ -1,4 +1,7 @@
 using carwash.Model.Context;
+using carwash.Repository;
+using carwash.Repository.Contracts;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +32,19 @@ namespace carwash.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CarwashDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalDB")));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddAuthentication("BearerAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BearerAuthenticationHandler>("BearerAuthentication", null);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                builder
+                .WithOrigins(new[] { "http://localhost:3000", "http://localhost:8080", "http://localhost:4200" })
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()
+                );
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -49,7 +65,8 @@ namespace carwash.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors("CorsPolicy");
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\carwash.Dtos\carwash.Dtos.csproj" />
     <ProjectReference Include="..\carwash.Model\carwash.Model.csproj" />
   </ItemGroup>
 

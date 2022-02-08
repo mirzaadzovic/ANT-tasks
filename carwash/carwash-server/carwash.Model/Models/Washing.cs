@@ -22,5 +22,9 @@ namespace carwash.Model.Models
         {
             this.TotalPrice = Options.GetPrice(Program);
         }
+        public void GetDiscount()
+        {
+            if(Discount!=null) this.TotalPrice -= TotalPrice * Discount.TotalDiscount;
+        }
     }
 }
