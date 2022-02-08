@@ -32,6 +32,15 @@ namespace carwash.Repository
             }
         }
 
+        public IProgramsRepository Programs
+        {
+            get
+            {
+                if (_programsRepository == null) _programsRepository = new ProgramsRepository(_context);
+                return _programsRepository;
+            }
+        }
+
         public async Task Save()
         {
             await _context.SaveChangesAsync();
