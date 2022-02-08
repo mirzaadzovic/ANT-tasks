@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace carwash.API.Security
@@ -16,7 +17,7 @@ namespace carwash.API.Security
     {
         private readonly IUnitOfWork _repository;
         private readonly ILogger _logger;
-        public BearerAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, IRepositoryWrapper repository) : base(options, logger, encoder, clock)
+        public BearerAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, IUnitOfWork repository) : base(options, logger, encoder, clock)
         {
             _repository = repository;
             _logger = logger.CreateLogger("Auth");
@@ -35,7 +36,7 @@ namespace carwash.API.Security
             try
             {
                 var token = _repository.JwtService.Verify(jwt);
-                var userId = int.Parse(token.Issuer);
+                var userId = Guid.Parse(token.Issuer);
 
                 var user = _repository.Auth.GetById(userId);
 

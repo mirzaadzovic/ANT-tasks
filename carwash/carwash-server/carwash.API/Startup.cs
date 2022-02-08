@@ -1,3 +1,4 @@
+using carwash.API.Security;
 using carwash.Model.Context;
 using carwash.Repository;
 using carwash.Repository.Contracts;

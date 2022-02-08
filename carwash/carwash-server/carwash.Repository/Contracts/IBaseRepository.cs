@@ -9,6 +9,6 @@ namespace carwash.Repository.Contracts
     public interface IBaseRepository<T> where T:class
     {
         IEnumerable<T> Get();
-        T GetById(int id);
+        T GetById(object id);
     }
 }

@@ -17,4 +17,8 @@
     <Folder Include="Enums\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\carwash.Dtos\carwash.Dtos.csproj" />
+  </ItemGroup>
+
 </Project>

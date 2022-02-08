@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\carwash.Dtos\carwash.Dtos.csproj" />
     <ProjectReference Include="..\carwash.Model\carwash.Model.csproj" />
+    <ProjectReference Include="..\carwash.Repository\carwash.Repository.csproj" />
   </ItemGroup>
 
 </Project>

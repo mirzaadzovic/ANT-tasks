@@ -21,7 +21,7 @@ namespace carwash.Repository
             return _context.Set<T>();
         }
 
-        public virtual T GetById(int id)
+        public virtual T GetById(object id)
         {
             return _context.Set<T>().Find(id);
         }
