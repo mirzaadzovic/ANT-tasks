@@ -32,7 +32,7 @@ namespace carwash.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CarwashDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalDB")));
+            services.AddDbContext<CarwashDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("carwashDB")));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAuthentication("BearerAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BearerAuthenticationHandler>("BearerAuthentication", null);
@@ -63,7 +63,7 @@ namespace carwash.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "carwash.API v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseCors("CorsPolicy");
