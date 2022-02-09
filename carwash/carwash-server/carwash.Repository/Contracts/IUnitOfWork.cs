@@ -11,6 +11,7 @@ namespace carwash.Repository.Contracts
         public IJwtRepository JwtService {get;}
         public IAuthRepository Auth {get;}
         public IProgramsRepository Programs { get; }
+        public IWashingRepository Washings { get; }
         Task Save();
     }
 }

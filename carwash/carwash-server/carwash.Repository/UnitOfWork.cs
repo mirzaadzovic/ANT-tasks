@@ -14,7 +14,7 @@ namespace carwash.Repository
         private IAuthRepository _authRepository;
         private IProgramsRepository _programsRepository;
         private IJwtRepository _jwtRepository;
-
+        private IWashingRepository _washingRepository;
         public IJwtRepository JwtService {
             get
             {
@@ -38,6 +38,14 @@ namespace carwash.Repository
             {
                 if (_programsRepository == null) _programsRepository = new ProgramsRepository(_context);
                 return _programsRepository;
+            }
+        }
+        public IWashingRepository Washings
+        {
+            get
+            {
+                if (_washingRepository == null) _washingRepository = new WashingRepository(_context);
+                return _washingRepository;
             }
         }
 

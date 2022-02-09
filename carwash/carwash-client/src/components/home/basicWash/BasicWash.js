@@ -18,7 +18,6 @@ const BasicWash = () => {
     setStep((old) => old + 1);
 
     if (step < basicWashData.length - 1) {
-      console.log(step);
       setText(basicWashData[step + 1].text);
       setBtnDisabled(false);
     } else navigate("/checkout");

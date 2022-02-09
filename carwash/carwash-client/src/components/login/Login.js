@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { logInUser, userReset } from "../../redux/actions/userActions";
+import {
+  logInUser,
+  registerUser,
+  userReset,
+} from "../../redux/actions/userActions";
 import { selectUser, selectUserError } from "../../redux/reducers/userReducer";
 import Logo from "../logo/Logo";
 import "./Login.css";
 
-const Login = ({ loggedInUser, login, error, resetUserError }) => {
+const Login = ({ loggedInUser, login, error, resetUserError, register }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
+  const [registration, setRegistration] = useState(false);
 
   useEffect(() => {
     redirectIfLoggedIn();
@@ -24,6 +29,11 @@ const Login = ({ loggedInUser, login, error, resetUserError }) => {
     await login(username, password);
   };
 
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    await register(username, password);
+  };
+
   function redirectIfLoggedIn() {
     if (error) {
       setShowError(true);
@@ -35,7 +45,7 @@ const Login = ({ loggedInUser, login, error, resetUserError }) => {
   return (
     <div className="login">
       <Logo />
-      <h1>Login</h1>
+      <h1>{registration ? "Register" : "Login"}</h1>
       {showError && <p className="error">Wrong username or password</p>}
       <form>
         <input
@@ -52,16 +62,38 @@ const Login = ({ loggedInUser, login, error, resetUserError }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button
-          type="submit"
-          onClick={async (e) => await handleLogin(e)}
-          className="btn login__button"
-        >
-          Login
-        </button>
-        <Link className="link login__link" to="/register">
-          Don't have an account? Register...
-        </Link>
+        {registration ? (
+          <button
+            type="submit"
+            onClick={async (e) => await handleRegister(e)}
+            className="btn login__button"
+          >
+            Register
+          </button>
+        ) : (
+          <button
+            type="submit"
+            onClick={async (e) => await handleLogin(e)}
+            className="btn login__button"
+          >
+            Login
+          </button>
+        )}
+        {registration ? (
+          <p
+            className="link login__link"
+            onClick={() => setRegistration(!registration)}
+          >
+            Already have an account? Login...
+          </p>
+        ) : (
+          <p
+            className="link login__link"
+            onClick={() => setRegistration(!registration)}
+          >
+            Don't have an account? Register...
+          </p>
+        )}
       </form>
     </div>
   );
@@ -75,8 +107,10 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: (email, password) => dispatch(logInUser(email, password)),
+    login: (username, password) => dispatch(logInUser(username, password)),
     resetUserError: () => dispatch(userReset()),
+    register: (username, password) =>
+      dispatch(registerUser({ username: username, password: password })),
   };
 };
 
