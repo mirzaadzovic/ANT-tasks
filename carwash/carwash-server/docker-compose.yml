@@ -13,20 +13,20 @@ services:
     networks:
       - carwashnet
 
-  # carwash-api:
-  #   restart: unless-stopped
-  #   build:
-  #     context: .
-  #   environment:
-  #     - ConnectionStrings:carwashDb=Server=carwash-sql,1433;Database=Carwash;User=sa;Password=PZPpzp123!;ConnectRetryCount=0
-  #   ports:
-  #     - 5013:80
-  #   networks:
-  #     - carwashnet
-  #   links:
-  #     - carwash-sql
-  #   depends_on:
-  #     - carwash-sql
+  carwash-api:
+    restart: unless-stopped
+    build:
+      context: .
+    environment:
+      - ConnectionStrings:carwashDB=Server=carwash-sql,1433;Database=Carwash;User=sa;Password=PZPpzp123!;ConnectRetryCount=0
+    ports:
+      - 5013:80
+    networks:
+      - carwashnet
+    links:
+      - carwash-sql
+    depends_on:
+      - carwash-sql
 
 networks:
   carwashnet:
