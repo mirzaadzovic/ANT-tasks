@@ -1,0 +1,17 @@
+.programs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.programs > h4 {
+  font-weight: 400;
+  margin: 30px;
+}
+.programs__button {
+  width: 80%;
+  height: 40px;
+  margin: 20px 0;
+}

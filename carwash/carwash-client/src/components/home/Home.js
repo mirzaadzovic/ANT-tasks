@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { activeFoamPath, basicWashPath } from "../../paths/paths";
 import { logoutUser } from "../../redux/actions/userActions";
 import { selectUser } from "../../redux/reducers/userReducer";
 import Logo from "../logo/Logo";
 import "./Home.css";
+import Programs from "./programs/Programs";
 
 function Home({ user, logout }) {
   const navigate = useNavigate();
   console.log(user);
 
   useEffect(() => {
-    console.log(user);
     if (!user?.customerId) navigate("/login");
   }, [user]);
 
@@ -22,18 +23,24 @@ function Home({ user, logout }) {
   return (
     <div className="home">
       <div className="home__header">
-        <Logo />
+        <div className="home__logo">
+          <Logo />
+        </div>
         <div className="home__headerOptions">
-          <h5>{user?.username}</h5>
+          <h4>{user?.username}</h4>
           <p className="link" onClick={handleLogout}>
             Logout
           </p>
         </div>
       </div>
-      <Routes>
-        <Route path="kec" element={<h1>kec</h1>} />
-        <Route path="dvica" element={<h1>dvica</h1>} />
-      </Routes>
+
+      <div className="home__body">
+        <Routes>
+          <Route path="/" element={<Programs />} />
+          <Route path={basicWashPath} element={<h1>BASIC</h1>} />
+          <Route path={activeFoamPath} element={<h1>ACTIVE FOAM</h1>} />
+        </Routes>
+      </div>
     </div>
   );
 }

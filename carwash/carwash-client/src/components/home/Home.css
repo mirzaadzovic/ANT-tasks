@@ -5,4 +5,52 @@
   border-radius: 5px;
   border: 1px solid lightgrey;
   box-shadow: 4px 8px 17px -7px rgba(0, 0, 0, 0.25);
+  padding: 5px 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.home__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.home__headerOptions {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 40px;
+}
+
+.home__headerOptions > h4 {
+  margin-right: 5px;
+}
+
+.home__logo > img {
+  height: 5rem;
+}
+
+.home__body {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 670px) {
+  .home {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .home__header {
+    justify-content: flex-start;
+  }
+  .home__logo > img {
+    height: 3rem;
+  }
 }
