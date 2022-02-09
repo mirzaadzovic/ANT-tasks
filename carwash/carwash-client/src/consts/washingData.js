@@ -1,4 +1,9 @@
-import { setDryingBasic, setWaxBasic } from "../redux/actions/washingActions";
+import {
+  setActiveFoam,
+  setDryingBasic,
+  setMinutesSelfService,
+  setWaxBasic,
+} from "../redux/actions/washingActions";
 
 export const basicWashData = [
   {
@@ -11,8 +16,14 @@ export const basicWashData = [
   },
 ];
 
-const selfServiceData = [
-  {
-    text: "Choose minutes",
-  },
-];
+export const selfServiceData = {
+  text: "Choose minutes",
+  options: ["2", "5", "10"],
+  action: setMinutesSelfService,
+};
+
+export const activeFoamData = {
+  text: "Choose active foam type",
+  options: ["Dr. Active", "Nano Pro"],
+  action: setActiveFoam,
+};

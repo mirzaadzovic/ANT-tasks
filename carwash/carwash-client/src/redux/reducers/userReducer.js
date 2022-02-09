@@ -13,6 +13,7 @@ const initialState = {
 };
 
 export const selectUser = (state) => state.user.loggedInUser;
+export const selectUserLoading = (state) => state.user.loading;
 export const selectUserError = (state) => state.user.error;
 
 const userReducer = (state = initialState, action) => {

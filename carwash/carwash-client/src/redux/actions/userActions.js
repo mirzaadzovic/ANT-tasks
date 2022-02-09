@@ -1,5 +1,6 @@
 import APIService from "../../services/APIService";
 import AuthService from "../../services/AuthService";
+import { selectUserError } from "../reducers/userReducer";
 
 export const USER_LOGIN_REQUEST = "USER_LOGIN_REQUEST";
 export const userLoginRequest = () => ({
@@ -34,19 +35,19 @@ export const fetchLoggedInUser = () => {
     AuthService.getLoggedInUser()
       .then((data) => dispatch(userLoginSuccess(data)))
       .catch((err) => {
+        dispatch(userLoginFaulire("Not logged in"));
         dispatch(userReset());
       });
   };
 };
 
 export const logInUser = (email, password) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(userLoginRequest);
-    await AuthService.logIn(email, password)
+    AuthService.logIn(email, password)
       .then((data) => dispatch(userLoginSuccess(data)))
       .catch((err) => {
-        console.log(err.toString());
-        dispatch(userLoginFaulire(err.toString()));
+        dispatch(userLoginFaulire("Not logged in"));
       });
   };
 };

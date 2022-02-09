@@ -25,7 +25,6 @@ const Login = ({ loggedInUser, login, error, resetUserError }) => {
   };
 
   function redirectIfLoggedIn() {
-    console.log(loggedInUser);
     if (error) {
       setShowError(true);
       setPassword("");

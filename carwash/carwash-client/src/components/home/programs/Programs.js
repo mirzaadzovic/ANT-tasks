@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { connect, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import paths from "../../../consts/paths";
-import { fetchPrograms } from "../../../redux/actions/programsActions";
+import {
+  fetchPrograms,
+  setProgram,
+} from "../../../redux/actions/programsActions";
 import {
   selectProgramLoading,
   selectPrograms,
@@ -16,8 +19,14 @@ const Programs = ({ programs, loading, getPrograms }) => {
   }, []);
 
   if (loading) return <h2>Loading...</h2>;
-  const handleProgram = (id) => {
-    navigate(paths[id - 1]);
+
+  const handleProgram = (program) => {
+    setProgram(program);
+    navigate(paths[program.programId - 1]);
+  };
+
+  const reset = (action) => {
+    action();
   };
 
   return (
@@ -27,7 +36,7 @@ const Programs = ({ programs, loading, getPrograms }) => {
         <button
           key={idx}
           className="btn programs__button"
-          onClick={() => handleProgram(p.programId)}
+          onClick={() => handleProgram(p)}
         >
           {p.name}
         </button>
@@ -45,6 +54,7 @@ const mapSateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getPrograms: () => dispatch(fetchPrograms()),
+    setProgram: (program) => dispatch(setProgram(program)),
   };
 };
 export default connect(mapSateToProps, mapDispatchToProps)(Programs);

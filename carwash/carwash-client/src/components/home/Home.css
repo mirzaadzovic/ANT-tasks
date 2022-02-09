@@ -9,6 +9,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  animation: 0.4s linear fadeIn;
 }
 
 .home__header {
@@ -51,5 +52,16 @@
   }
   .home__logo > img {
     height: 3rem;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
   }
 }

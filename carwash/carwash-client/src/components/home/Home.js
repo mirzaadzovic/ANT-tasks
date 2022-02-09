@@ -1,25 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
-import { activeFoamPath, basicWashPath } from "../../consts/paths";
-import { logoutUser } from "../../redux/actions/userActions";
-import { selectUser } from "../../redux/reducers/userReducer";
+import {
+  activeFoamPath,
+  basicWashPath,
+  selfServicePath,
+} from "../../consts/paths";
+import { fetchLoggedInUser, logoutUser } from "../../redux/actions/userActions";
+import {
+  selectUser,
+  selectUserError,
+  selectUserLoading,
+} from "../../redux/reducers/userReducer";
 import Logo from "../logo/Logo";
 import BasicWash from "./basicWash/BasicWash";
+import Checkout from "./checkout/Checkout";
 import "./Home.css";
 import Programs from "./programs/Programs";
+import SelfServiceWash from "./selfServiceWash/SelfServiceWash";
 
-function Home({ user, logout }) {
+function Home({ user, logout, loading, error, fetchUser }) {
   const navigate = useNavigate();
-  console.log(user);
 
   useEffect(() => {
-    if (!user?.customerId) navigate("/login");
+    if (!user) navigate("/login");
   }, [user]);
 
   function handleLogout() {
     logout();
   }
+
+  if (loading) return <h2>Loading...</h2>;
 
   return (
     <div className="home">
@@ -40,6 +51,8 @@ function Home({ user, logout }) {
           <Route path="/" element={<Programs />} />
           <Route path={basicWashPath} element={<BasicWash />} />
           <Route path={activeFoamPath} element={<h1>ACTIVE FOAM</h1>} />
+          <Route path={selfServicePath} element={<SelfServiceWash />} />
+          <Route path={"/checkout"} element={<Checkout />} />
         </Routes>
       </div>
     </div>
@@ -49,12 +62,15 @@ function Home({ user, logout }) {
 const mapStateToProps = (state) => {
   return {
     user: selectUser(state),
+    error: selectUserError(state),
+    loading: selectUserLoading(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => dispatch(logoutUser()),
+    fetchUser: () => dispatch(fetchLoggedInUser()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
