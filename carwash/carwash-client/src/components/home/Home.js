@@ -12,14 +12,16 @@ import {
   selectUserError,
   selectUserLoading,
 } from "../../redux/reducers/userReducer";
+import { selectWashingPrice } from "../../redux/reducers/washingReducer";
 import Logo from "../logo/Logo";
+import ActiveFoamWash from "./activeFoamWash/ActiveFoamWash";
 import BasicWash from "./basicWash/BasicWash";
 import Checkout from "./checkout/Checkout";
 import "./Home.css";
 import Programs from "./programs/Programs";
 import SelfServiceWash from "./selfServiceWash/SelfServiceWash";
 
-function Home({ user, logout, loading, error, fetchUser }) {
+function Home({ user, logout, loading, error, price }) {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,18 +41,21 @@ function Home({ user, logout, loading, error, fetchUser }) {
           <Logo />
         </div>
         <div className="home__headerOptions">
-          <h4>{user?.username}</h4>
-          <p className="link" onClick={handleLogout}>
-            Logout
-          </p>
+          <div className="home__user">
+            <h4>{user?.username}</h4>
+            <p className="link" onClick={handleLogout}>
+              Logout
+            </p>
+          </div>
         </div>
       </div>
+      <p className="home__price">Total Price: {price}KM</p>
 
       <div className="home__body">
         <Routes>
           <Route path="/" element={<Programs />} />
           <Route path={basicWashPath} element={<BasicWash />} />
-          <Route path={activeFoamPath} element={<h1>ACTIVE FOAM</h1>} />
+          <Route path={activeFoamPath} element={<ActiveFoamWash />} />
           <Route path={selfServicePath} element={<SelfServiceWash />} />
           <Route path={"/checkout"} element={<Checkout />} />
         </Routes>
@@ -64,6 +69,7 @@ const mapStateToProps = (state) => {
     user: selectUser(state),
     error: selectUserError(state),
     loading: selectUserLoading(state),
+    price: selectWashingPrice(state),
   };
 };
 

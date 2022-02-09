@@ -1,35 +1,34 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { selfServiceData } from "../../../consts/washingData";
+import { activeFoamData } from "../../../consts/washingData";
 import { resetWashingProgram } from "../../../redux/actions/washingActions";
-import "./SelfServiceWash.css";
+import "./ActiveFoamWash.css";
 
-const SelfServiceWash = () => {
+const ActiveFoamWash = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => dispatch(resetWashingProgram()), []);
 
   function handleProgram(id) {
-    const price = selfServiceData.options[id];
-    dispatch(selfServiceData.action(price));
+    dispatch(activeFoamData.action(id));
     navigate("/checkout");
   }
   return (
-    <div className="selfServiceWash">
-      <h4 className="program-txt">{selfServiceData.text} (1KM/min)</h4>
-      {selfServiceData.options.map((p, idx) => (
+    <div className="activeFoamWash">
+      <h4 className="program-txt">{activeFoamData.text} (1KM/min)</h4>
+      {activeFoamData.options.map((p, idx) => (
         <button
           key={idx}
           className="btn programs__button"
           onClick={() => handleProgram(idx)}
         >
-          {p} mins
+          {p}
         </button>
       ))}
     </div>
   );
 };
 
-export default SelfServiceWash;
+export default ActiveFoamWash;

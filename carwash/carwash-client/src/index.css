@@ -87,6 +87,7 @@ body,
 .program-txt {
   font-weight: 400;
   margin: 30px;
+  text-align: center;
 }
 
 .btn-disabled {

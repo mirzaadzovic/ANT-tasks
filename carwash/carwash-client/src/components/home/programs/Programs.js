@@ -2,19 +2,21 @@ import React, { useEffect } from "react";
 import { connect, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import paths from "../../../consts/paths";
+import { fetchPrograms } from "../../../redux/actions/programsActions";
 import {
-  fetchPrograms,
-  setProgram,
-} from "../../../redux/actions/programsActions";
+  resetWashing,
+  setWashingProgram,
+} from "../../../redux/actions/washingActions";
 import {
   selectProgramLoading,
   selectPrograms,
 } from "../../../redux/reducers/programsReducer";
 import "./Programs.css";
 
-const Programs = ({ programs, loading, getPrograms }) => {
+const Programs = ({ programs, loading, getPrograms, setProgram, reset }) => {
   const navigate = useNavigate();
   useEffect(() => {
+    reset();
     getPrograms();
   }, []);
 
@@ -23,10 +25,6 @@ const Programs = ({ programs, loading, getPrograms }) => {
   const handleProgram = (program) => {
     setProgram(program);
     navigate(paths[program.programId - 1]);
-  };
-
-  const reset = (action) => {
-    action();
   };
 
   return (
@@ -54,7 +52,10 @@ const mapSateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getPrograms: () => dispatch(fetchPrograms()),
-    setProgram: (program) => dispatch(setProgram(program)),
+    setProgram: (program) => dispatch(setWashingProgram(program)),
+    reset: () => {
+      dispatch(resetWashing());
+    },
   };
 };
 export default connect(mapSateToProps, mapDispatchToProps)(Programs);

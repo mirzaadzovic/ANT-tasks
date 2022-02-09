@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
   selectWashingOptions,
@@ -9,7 +9,12 @@ import "./Checkout.css";
 const Checkout = () => {
   const program = useSelector(selectWashingProgram);
   const options = useSelector(selectWashingOptions);
-  console.log(options);
+
+  useEffect(() => {
+    console.log(program);
+    console.log(options);
+  }, []);
+
   return (
     <div className="checkout">
       <p>Use drying: {options?.useDrying ? "2KM" : "NO"}</p>

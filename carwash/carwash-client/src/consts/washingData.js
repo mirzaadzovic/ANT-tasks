@@ -24,6 +24,6 @@ export const selfServiceData = {
 
 export const activeFoamData = {
   text: "Choose active foam type",
-  options: ["Dr. Active", "Nano Pro"],
+  options: ["Dr. Active (2KM)", "Nano Pro (4KM)"],
   action: setActiveFoam,
 };

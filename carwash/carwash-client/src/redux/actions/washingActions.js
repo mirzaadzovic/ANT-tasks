@@ -13,6 +13,13 @@ export const resetWashingProgram = () => {
   };
 };
 
+export const RESET_WASHING = "RESET_WASHING";
+export const resetWashing = () => {
+  return {
+    type: RESET_WASHING,
+  };
+};
+
 export const SET_DRYING_BASIC = "BASIC_SET_DRYING";
 export const setDryingBasic = (useDrying) => {
   return {
