@@ -1,0 +1,16 @@
+.basicWash {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.basicWash__options > button {
+  margin: 0px 30px;
+  padding: 0 30px;
+}
+.basicWash__reset {
+  position: absolute;
+  bottom: 40px;
+  padding: 0 30px;
+}

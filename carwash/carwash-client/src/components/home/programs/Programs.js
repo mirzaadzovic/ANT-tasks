@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import paths from "../../../paths/paths";
+import paths from "../../../consts/paths";
 import { fetchPrograms } from "../../../redux/actions/programsActions";
 import {
   selectProgramLoading,
@@ -22,7 +22,7 @@ const Programs = ({ programs, loading, getPrograms }) => {
 
   return (
     <div className="programs">
-      <h4>Choose washing programme</h4>
+      <h4 className="program-txt">Choose washing programme</h4>
       {programs.map((p, idx) => (
         <button
           key={idx}
