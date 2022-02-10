@@ -1,4 +1,5 @@
-﻿using carwash.Dtos.Requests;
+﻿using carwash.Dtos;
+using carwash.Dtos.Requests;
 using carwash.Model.Context;
 using carwash.Model.Models;
 using carwash.Repository.Contracts;
@@ -42,15 +43,23 @@ namespace carwash.Repository
         {
             var program = _context.Set<Program>().Find(programId);
             decimal discount = 1;
-            if (HasDiscount(customerId)) discount -= 0.2m;
+            if (HasDiscount(customerId).HasDiscount) discount -= 0.2m;
+
             return options.GetPrice(program)*discount;
         }
 
-        public bool HasDiscount(Guid customerId)
+        public DiscountDto HasDiscount(Guid customerId)
         {
             var washings = _context.Washings.Where(w => w.CustomerId == customerId);
             bool isWashingCountDivisibleByTen = (washings.Count() + 1) % 10 == 0;
-            return washings.Any() && isWashingCountDivisibleByTen;
+
+            var discount= new DiscountDto()
+            {
+                HasDiscount = washings.Any() && isWashingCountDivisibleByTen,
+            };
+
+            discount.CalculateWashingsTillDiscount(washings.Count());
+            return discount;
         }
         public static Options GetOptions(WashingInsertRequest request)
         {

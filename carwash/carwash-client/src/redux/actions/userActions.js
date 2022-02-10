@@ -35,8 +35,7 @@ export const fetchLoggedInUser = () => {
     AuthService.getLoggedInUser()
       .then((data) => dispatch(userLoginSuccess(data)))
       .catch((err) => {
-        dispatch(userLoginFaulire("Not logged in"));
-        dispatch(userReset());
+        console.clear();
       });
   };
 };
@@ -66,8 +65,7 @@ export const registerUser = (user) => {
     APIService.post("/auth/register", user)
       .then((data) => dispatch(userLoginSuccess(data)))
       .catch((err) => {
-        console.log(err);
-        userLoginFaulire(err.toString());
+        userLoginFaulire("error registrating");
       });
   };
 };

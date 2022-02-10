@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import Home from "./components/home/Home";
 import { useSelector } from "react-redux";
 import { selectUserLoading } from "./redux/reducers/userReducer";
+import { useEffect } from "react";
 
 function App() {
   const loading = useSelector(selectUserLoading);

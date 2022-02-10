@@ -24,6 +24,10 @@ const Login = ({ loggedInUser, login, error, resetUserError, register }) => {
     };
   }, [loggedInUser, error]);
 
+  useEffect(() => {
+    resetUserError();
+  }, []);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     await login(username, password);
@@ -42,6 +46,7 @@ const Login = ({ loggedInUser, login, error, resetUserError, register }) => {
     if (loggedInUser?.customerId) navigate("/");
   }
 
+  const disabled = !username || !password;
   return (
     <div className="login">
       <Logo />
@@ -66,7 +71,8 @@ const Login = ({ loggedInUser, login, error, resetUserError, register }) => {
           <button
             type="submit"
             onClick={async (e) => await handleRegister(e)}
-            className="btn login__button"
+            className={`btn login__button ${disabled ? "btn-disabled" : ""}`}
+            disabled={disabled}
           >
             Register
           </button>
@@ -74,7 +80,8 @@ const Login = ({ loggedInUser, login, error, resetUserError, register }) => {
           <button
             type="submit"
             onClick={async (e) => await handleLogin(e)}
-            className="btn login__button"
+            className={`btn login__button ${disabled ? "btn-disabled" : ""}`}
+            disabled={disabled}
           >
             Login
           </button>

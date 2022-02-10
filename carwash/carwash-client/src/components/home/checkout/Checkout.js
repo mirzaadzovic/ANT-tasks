@@ -16,10 +16,10 @@ const Checkout = ({ program, options, user, price }) => {
   const navigate = useNavigate();
 
   useEffect(async () => {
-    const hasDiscount = await APIService.getAll("/api/washings/discount", {
+    const response = await APIService.getAll("/api/washings/discount", {
       customerId: user.customerId,
     });
-    setDiscount(hasDiscount);
+    setDiscount(response);
   }, []);
 
   const submit = async () => {
@@ -33,14 +33,14 @@ const Checkout = ({ program, options, user, price }) => {
     navigate("/");
   };
 
-  const total = discount ? (price * 0.8).toFixed(2) : price;
+  const total = discount.hasDiscount ? (price * 0.8).toFixed(2) : price;
 
   return (
     <div className="checkout">
-      <h2>
-        {discount
+      <h2 className="program-txt">
+        {discount.hasDiscount
           ? `You have 20% discount`
-          : "You don't have discount right now"}
+          : `No discount right now (${discount.washingsUntilDiscount} more washings until discount)`}
       </h2>
       <button className="btn programs__button" onClick={submit}>
         Pay ({total}KM)
