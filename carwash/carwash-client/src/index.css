@@ -7,9 +7,8 @@
 }
 :root {
   --blue: rgb(36, 41, 87);
-  --blue-lighter: rgb(85, 91, 141);
+  --blue-lighter: rgb(52, 56, 99);
   --blue-shadow: rgb(106, 120, 165);
-  --purple: rgb(173, 109, 170);
 }
 body {
   margin: 0;

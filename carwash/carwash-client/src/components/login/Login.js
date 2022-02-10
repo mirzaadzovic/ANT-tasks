@@ -69,6 +69,7 @@ const Login = ({ loggedInUser, login, error, resetUserError, register }) => {
         />
         {registration ? (
           <button
+            name="register"
             type="submit"
             onClick={async (e) => await handleRegister(e)}
             className={`btn login__button ${disabled ? "btn-disabled" : ""}`}
@@ -78,6 +79,7 @@ const Login = ({ loggedInUser, login, error, resetUserError, register }) => {
           </button>
         ) : (
           <button
+            name="login"
             type="submit"
             onClick={async (e) => await handleLogin(e)}
             className={`btn login__button ${disabled ? "btn-disabled" : ""}`}

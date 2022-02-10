@@ -10,7 +10,6 @@ const initialState = {
   error: false,
 };
 
-const programPaths = ["basic-wash", "active-foam-wash", "self-service"];
 export const selectPrograms = (state) => state.program.programs;
 export const selectProgramError = (state) => state.program.error;
 export const selectProgramLoading = (state) => state.program.loading;
