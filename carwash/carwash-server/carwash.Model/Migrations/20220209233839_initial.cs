@@ -59,7 +59,7 @@ namespace carwash.Model.Migrations
                     TotalPrice = table.Column<decimal>(type: "money", nullable: false),
                     ProgramId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DiscountId = table.Column<int>(type: "int", nullable: false)
+                    DiscountId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -75,7 +75,7 @@ namespace carwash.Model.Migrations
                         column: x => x.DiscountId,
                         principalTable: "Discounts",
                         principalColumn: "WashingDiscountId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Washings_Programs_ProgramId",
                         column: x => x.ProgramId,

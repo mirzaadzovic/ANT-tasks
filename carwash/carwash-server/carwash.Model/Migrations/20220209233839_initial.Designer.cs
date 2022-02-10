@@ -10,7 +10,7 @@ using carwash.Model.Context;
 namespace carwash.Model.Migrations
 {
     [DbContext(typeof(CarwashDbContext))]
-    [Migration("20220208210149_initial")]
+    [Migration("20220209233839_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,7 +111,7 @@ namespace carwash.Model.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("DiscountId")
+                    b.Property<int?>("DiscountId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProgramId")
@@ -206,9 +206,7 @@ namespace carwash.Model.Migrations
 
                     b.HasOne("carwash.Model.Models.WashingDiscount", "Discount")
                         .WithMany()
-                        .HasForeignKey("DiscountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DiscountId");
 
                     b.HasOne("carwash.Model.Models.Program", "Program")
                         .WithMany()

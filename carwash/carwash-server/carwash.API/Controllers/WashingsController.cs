@@ -17,7 +17,7 @@ namespace carwash.API.Controllers
         {
             _repository = repository;
         }
-        [HttpGet("Discount/{customerId}")]
+        [HttpGet("Discount/")]
         public IActionResult GetDiscount([FromQuery] Guid customerId)
         {
             try
@@ -38,9 +38,9 @@ namespace carwash.API.Controllers
             {
                 if (request == null) return BadRequest("No body");
                 var washing = _repository.Washings.Insert(request);
-                return Ok(washing);
+                return StatusCode(201);
             }
-            catch
+            catch(Exception ex)
             {
                 return StatusCode(500);
             }

@@ -103,7 +103,7 @@ namespace carwash.API.Controllers
                 Guid userId = Guid.Parse(token.Issuer);
 
                 var user = _repository.Auth.GetById(userId);
-                if (user == null) return BadRequest("Invalid token");
+                if(user==null) return BadRequest("Invalid token");
 
                 return Ok(Customer.Map(user));
             }

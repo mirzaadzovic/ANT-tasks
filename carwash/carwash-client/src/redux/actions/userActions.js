@@ -61,9 +61,9 @@ export const logoutUser = () => {
 };
 
 export const registerUser = (user) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(userLoginRequest());
-    await APIService.post("/auth/register", user)
+    APIService.post("/auth/register", user)
       .then((data) => dispatch(userLoginSuccess(data)))
       .catch((err) => {
         console.log(err);

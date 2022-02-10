@@ -14,13 +14,19 @@ const BasicWash = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    dispatch(resetWashingProgram()); // resetuje cijenu na load programa u slučaju da se vratimo sa checkouta
+  }, []);
+
   const nextStep = (answer) => {
     setStep((old) => old + 1);
 
     if (step < basicWashData.length - 1) {
+      // Mijenjanje teksta po koracima
       setText(basicWashData[step + 1].text);
       setBtnDisabled(false);
     } else navigate("/checkout");
+
     const { action } = basicWashData[step];
     dispatch(action(answer));
   };
@@ -29,9 +35,9 @@ const BasicWash = () => {
     setStep(0);
     setText(basicWashData[0].text);
     setBtnDisabled(true);
-
     dispatch(resetWashingProgram());
   };
+
   const reset = () => {
     resetStates();
   };

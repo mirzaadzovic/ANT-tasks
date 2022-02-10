@@ -60,6 +60,7 @@ namespace carwash.Model.Models
 
         public static CustomerDto Map(Customer request)
         {
+            if (request == null) return null;
             var customer = new CustomerDto()
             {
                 CustomerId = request.CustomerId,

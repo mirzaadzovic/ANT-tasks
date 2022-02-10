@@ -39,6 +39,7 @@ namespace carwash.API.Security
                 var userId = Guid.Parse(token.Issuer);
 
                 var user = _repository.Auth.GetById(userId);
+                if (user == null) throw new Exception("invalid token");
 
                 var claims = JwtRepository.CreateClaims(Customer.Map(user));
                 var identity = new ClaimsIdentity(claims, Scheme.Name);

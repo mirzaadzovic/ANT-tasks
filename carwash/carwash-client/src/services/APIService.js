@@ -1,8 +1,10 @@
 import axios from "../axios/axios";
 
 export default class APIService {
-  static async getAll(route) {
-    const response = await axios.get(route).catch((err) => err);
+  static async getAll(route, params) {
+    const response = await axios
+      .get(route, { params: { ...params } })
+      .catch((err) => err);
 
     if (response.status === 200) return response.data;
 

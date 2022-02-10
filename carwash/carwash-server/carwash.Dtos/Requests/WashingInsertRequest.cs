@@ -11,7 +11,7 @@ namespace carwash.Dtos.Requests
         public Guid CustomerId { get; set; }
         public int ProgramId { get; set; }
         public bool? UseDrying { get; set; }
-        public bool? UseWaxProtextion { get; set; }
+        public bool? UseWaxProtection { get; set; }
         public int? Minutes { get; set; }
         public int? FoamType { get; set; }
 

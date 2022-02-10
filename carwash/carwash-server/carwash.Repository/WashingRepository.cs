@@ -24,7 +24,7 @@ namespace carwash.Repository
                 CustomerId = request.CustomerId,
                 ProgramId = request.ProgramId,
                 WashingDate = DateTime.Now,
-                TotalPrice=CalculatePrice(options, (int)request?.ProgramId, request.CustomerId)
+                TotalPrice=CalculatePrice(options, (int)request?.ProgramId, request.CustomerId),
             };
 
             _context.Washings.Add(washing);
@@ -32,6 +32,8 @@ namespace carwash.Repository
 
             options.OptionsId = washing.WashingId;
             _context.Options.Add(options);
+            _context.SaveChanges();
+
 
             return washing;
         }
@@ -65,7 +67,7 @@ namespace carwash.Repository
                 options = new BasicWashOptions()
                 {
                     UseDrying = (bool)request.UseDrying,
-                    UseWaxProtection = (bool)request.UseWaxProtextion,
+                    UseWaxProtection = (bool)request.UseWaxProtection,
                 };
             }
             else if(request?.FoamType!=null)

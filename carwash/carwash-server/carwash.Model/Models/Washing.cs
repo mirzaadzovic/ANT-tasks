@@ -15,7 +15,7 @@ namespace carwash.Model.Models
         public Program Program { get; set; }
         public Guid CustomerId { get; set; }
         public Customer Customer { get; set; }
-        public int DiscountId { get; set; }
+        public int? DiscountId { get; set; }
         public WashingDiscount Discount { get; set; }
         public Options Options { get; set; }
         public void GetTotalPrice()

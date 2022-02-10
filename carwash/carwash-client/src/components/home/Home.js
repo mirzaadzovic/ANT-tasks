@@ -21,7 +21,7 @@ import "./Home.css";
 import Programs from "./programs/Programs";
 import SelfServiceWash from "./selfServiceWash/SelfServiceWash";
 
-function Home({ user, logout, loading, error, price }) {
+function Home({ user, logout, loading, price }) {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function Home({ user, logout, loading, error, price }) {
           </div>
         </div>
       </div>
-      <p className="home__price">Total Price: {price}KM</p>
+      {price > 0 && <p className="home__price">Total Price: {price}KM</p>}
 
       <div className="home__body">
         <Routes>
